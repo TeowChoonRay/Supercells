@@ -11,7 +11,7 @@ SUPERCELLS levereges on Agentic AI to capture, nurture, convert and revolutioniz
 See Supercells in action! Click below to watch a demonstration of our platform's capabilities:
 
 <p align="center">
-  <a href="https://youtu.be/wfSEPD1uwUk?si=i5-C_owfAJZ2zROd](https://youtu.be/qU6f5nGtU8E?si=oDCOboK08aOjRrx4" title="Supercells Demo">
+  <a href="https://youtu.be/qU6f5nGtU8E?si=oDCOboK08aOjRrx4" title="Supercells Demo">
     <img src="https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo on YouTube">
   </a>
 </p>
@@ -32,10 +32,10 @@ Built for NTU's CAmpcOde Hackathon 2025 - Code with AI, The SUPERCELLS project i
 
 | Name | GitHub | LinkedIn |
 |------|--------|----------|
-| Nicole Ang | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nicoleang18) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nicoleang18/)] |
+| Nicole Ang | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nicoleang18) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nicoleang18/) |
 | Teow Choon Ray | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TeowChoonRay) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/choonray/) |
-| Chloe Yeo | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itschloechloe) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/chloeyeo-yangenxi/)] |
-| Ryan Phua | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ryanphua02) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryanphua02/)] |
+| Chloe Yeo | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itschloechloe) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/chloeyeo-yangenxi/)|
+| Ryan Phua | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ryanphua02) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryanphua02/) |
 
 ## Overview
 
@@ -52,7 +52,7 @@ SUPERCELLS is an AI-powered lead qualification platform designed to help AI solu
 
 ## System Architecture
 <p align="center">
-  <img src="modelpipeline.png" alt="Supercells Pipeline">
+  <img src="architecture.png" alt="Supercells Architecture">
 </p>
 
 ## Technology Stack
