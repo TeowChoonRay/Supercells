@@ -111,4 +111,4 @@ SUPERCELLS is continuously evolving:
 - **Enhanced Social Media Integration** - Direct connections to more platforms
 - **Expanded API Ecosystem** - Integration with more third-party tools
 - **Real-time Alert System** - Immediate notifications for critical threats
-- **Customisabl Avatar** - Brand design and Gamification
+- **Customisable Avatar** - Brand design and Gamification
