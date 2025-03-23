@@ -11,7 +11,7 @@ SUPERCELLS levereges on Agentic AI to capture, nurture, convert and revolutioniz
 See Supercells in action! Click below to watch a demonstration of our platform's capabilities:
 
 <p align="center">
-  <a href="https://youtu.be/qU6f5nGtU8E?si=oDCOboK08aOjRrx4" title="Supercells Demo">
+  <a href="https://youtu.be/-Q3KlCV2iQU?si=Ftp9WrCa_ygLV6sO" title="Supercells Demo">
     <img src="https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo on YouTube">
   </a>
 </p>
