@@ -105,8 +105,7 @@ SUPERCELLS is an AI-powered lead qualification platform designed to help AI solu
    npm run dev
    ```
 
-   ## Future Developments
-
+## Future Developments
 SUPERCELLS is continuously evolving:
 
 - **Enhanced Social Media Integration** - Direct connections to more platforms
