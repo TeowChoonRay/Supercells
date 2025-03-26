@@ -2,12 +2,63 @@ import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
+import { useAuth } from '@/lib/auth';
+import { supabase } from '@/lib/supabase';
 
 function BusinessmanModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
   const modelRef = useRef<THREE.Group>();
   const rightArmRef = useRef<THREE.Mesh>();
   const [isWaving, setIsWaving] = useState(false);
   const [waveProgress, setWaveProgress] = useState(0);
+  const [avatarType, setAvatarType] = useState<string | null>(null);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchAvatarType = async () => {
+      if (!user) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('users')
+          .select('avatar_type')
+          .eq('id', user.id)
+          .single();
+
+        if (error) throw error;
+        setAvatarType(data?.avatar_type);
+      } catch (error) {
+        console.error('Error fetching avatar type:', error);
+      }
+    };
+
+    fetchAvatarType();
+  }, [user]);
+
+  const getShirtColor = () => {
+    switch (avatarType) {
+      case 'brain':
+        return '#22C55E'; // Green for Trailblazer
+      case 'target':
+        return '#3B82F6'; // Blue for Advisor
+      case 'handshake':
+        return '#EF4444'; // Red for Explorer
+      default:
+        return '#C4C6C8'; // Default gray
+    }
+  };
+
+  const getShirtDarkColor = () => {
+    switch (avatarType) {
+      case 'brain':
+        return '#15803D'; // Dark green
+      case 'target':
+        return '#1D4ED8'; // Dark blue
+      case 'handshake':
+        return '#B91C1C'; // Dark red
+      default:
+        return '#96999B'; // Default dark gray
+    }
+  };
 
   useFrame(() => {
     if (!modelRef.current || !rightArmRef.current) return;
@@ -58,7 +109,7 @@ function BusinessmanModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }
       {/* Body */}
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.7, 0.5, 2, 32]} />
-        <meshStandardMaterial color="#d76b78" />
+        <meshStandardMaterial color={getShirtColor()} />
       </mesh>
 
       {/* Left Arm */}
@@ -67,7 +118,7 @@ function BusinessmanModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }
         <meshStandardMaterial color="#e4c1ad" />
       </mesh>
 
-      {/* Right Arm (with wave animation) */}
+      {/* Right Arm */}
       <mesh 
         ref={rightArmRef}
         position={[0.8, 0.2, 0]} 

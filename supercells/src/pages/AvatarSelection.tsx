@@ -30,8 +30,8 @@ const avatarOptions = [
     title: 'The Explorer',
     description: 'Focuses on discovering start-ups, unicorns, and fast-growing companies that are expanding and may need innovative AI solutions.',
     icon: <Handshake className="h-8 w-8" />,
-    bgGradient: 'linear-gradient(135deg, #A855F7 0%, #6B21A8 100%)', // Purple gradient
-    ringColor: 'ring-purple-400',
+    bgGradient: 'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)', // Red gradient
+    ringColor: 'ring-red-400',
   },
 ];
 

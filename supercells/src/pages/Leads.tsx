@@ -23,14 +23,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/auth';
 import { useToast } from "@/components/ui/use-toast";
@@ -64,7 +56,6 @@ interface Filters {
 interface FindLeadsFilters {
   industry: string;
   location: string;
-  avatarType: string;
 }
 
 export default function Leads() {
@@ -76,8 +67,7 @@ export default function Leads() {
   const [showFindLeadsDialog, setShowFindLeadsDialog] = useState(false);
   const [findLeadsFilters, setFindLeadsFilters] = useState<FindLeadsFilters>({
     industry: '',
-    location: '',
-    avatarType: 'brain'
+    location: ''
   });
   const [filters, setFilters] = useState<Filters>({
     industry: null,
@@ -87,9 +77,31 @@ export default function Leads() {
   });
   const [uniqueIndustries, setUniqueIndustries] = useState<string[]>([]);
   const [uniqueLocations, setUniqueLocations] = useState<string[]>([]);
+  const [avatarType, setAvatarType] = useState<string | null>(null);
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('users')
+          .select('avatar_type')
+          .eq('id', user.id)
+          .single();
+
+        if (error) throw error;
+        setAvatarType(data?.avatar_type);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, [user]);
 
   useEffect(() => {
     const fetchLeads = async () => {
@@ -177,7 +189,7 @@ export default function Leads() {
   }, [filters, leads]);
 
   const handleFindLeads = async () => {
-    if (!user || !findLeadsFilters.industry || !findLeadsFilters.location) {
+    if (!user || !findLeadsFilters.industry || !findLeadsFilters.location || !avatarType) {
       toast({
         variant: "destructive",
         title: "Missing information",
@@ -191,7 +203,7 @@ export default function Leads() {
       const suggestions = await findLeads(
         findLeadsFilters.industry,
         findLeadsFilters.location,
-        findLeadsFilters.avatarType
+        avatarType
       );
       
       // Add each suggestion as a new lead
@@ -417,25 +429,21 @@ export default function Leads() {
                       <label className="text-sm font-medium text-zinc-400">
                         Industry
                       </label>
-                      <Select
+                      <select
                         value={filters.industry || 'all'}
-                        onValueChange={(value) => setFilters(prev => ({ 
+                        onChange={(e) => setFilters(prev => ({ 
                           ...prev, 
-                          industry: value === 'all' ? null : value 
+                          industry: e.target.value === 'all' ? null : e.target.value 
                         }))}
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md text-zinc-200"
                       >
-                        <SelectTrigger className="bg-zinc-800 border-zinc-700 text-zinc-200">
-                          <SelectValue placeholder="Select industry" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-zinc-800 border-zinc-700">
-                          <SelectItem value="all">All industries</SelectItem>
-                          {uniqueIndustries.map(industry => (
-                            <SelectItem key={industry} value={industry}>
-                              {industry}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <option value="all">All industries</option>
+                        {uniqueIndustries.map(industry => (
+                          <option key={industry} value={industry}>
+                            {industry}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     {/* Location Filter */}
@@ -443,25 +451,21 @@ export default function Leads() {
                       <label className="text-sm font-medium text-zinc-400">
                         Location
                       </label>
-                      <Select
+                      <select
                         value={filters.location || 'all'}
-                        onValueChange={(value) => setFilters(prev => ({ 
+                        onChange={(e) => setFilters(prev => ({ 
                           ...prev, 
-                          location: value === 'all' ? null : value 
+                          location: e.target.value === 'all' ? null : e.target.value 
                         }))}
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md text-zinc-200"
                       >
-                        <SelectTrigger className="bg-zinc-800 border-zinc-700 text-zinc-200">
-                          <SelectValue placeholder="Select location" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-zinc-800 border-zinc-700">
-                          <SelectItem value="all">All locations</SelectItem>
-                          {uniqueLocations.map(location => (
-                            <SelectItem key={location} value={location}>
-                              {location}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <option value="all">All locations</option>
+                        {uniqueLocations.map(location => (
+                          <option key={location} value={location}>
+                            {location}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     {/* Employee Range Filter */}
@@ -469,25 +473,21 @@ export default function Leads() {
                       <label className="text-sm font-medium text-zinc-400">
                         Company Size
                       </label>
-                      <Select
+                      <select
                         value={filters.employeeRange || 'all'}
-                        onValueChange={(value) => setFilters(prev => ({ 
+                        onChange={(e) => setFilters(prev => ({ 
                           ...prev, 
-                          employeeRange: value === 'all' ? null : value 
+                          employeeRange: e.target.value === 'all' ? null : e.target.value 
                         }))}
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md text-zinc-200"
                       >
-                        <SelectTrigger className="bg-zinc-800 border-zinc-700 text-zinc-200">
-                          <SelectValue placeholder="Select company size" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-zinc-800 border-zinc-700">
-                          <SelectItem value="all">Any size</SelectItem>
-                          {employeeRanges.map(range => (
-                            <SelectItem key={range.value} value={range.value}>
-                              {range.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <option value="all">Any size</option>
+                        {employeeRanges.map(range => (
+                          <option key={range.value} value={range.value}>
+                            {range.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     {/* Lead Score Filter */}
@@ -500,12 +500,13 @@ export default function Leads() {
                           {filters.minLeadScore}/100
                         </span>
                       </div>
-                      <Slider
-                        value={[filters.minLeadScore]}
-                        onValueChange={([value]) => setFilters(prev => ({ ...prev, minLeadScore: value }))}
+                      <input
+                        type="range"
+                        value={filters.minLeadScore}
+                        onChange={(e) => setFilters(prev => ({ ...prev, minLeadScore: parseInt(e.target.value) }))}
                         max={100}
                         step={10}
-                        className="[&_[role=slider]]:bg-blue-500"
+                        className="w-full"
                       />
                     </div>
                   </div>
@@ -567,22 +568,6 @@ export default function Leads() {
                         placeholder="e.g., San Francisco, CA"
                         className="w-full px-3 py-2 bg-zinc-800/50 border border-zinc-700 rounded-md text-zinc-200 placeholder:text-zinc-500"
                       />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-zinc-400">AI Agent Personality</label>
-                      <Select
-                        value={findLeadsFilters.avatarType}
-                        onValueChange={(value) => setFindLeadsFilters(prev => ({ ...prev, avatarType: value }))}
-                      >
-                        <SelectTrigger className="bg-zinc-800 border-zinc-700 text-zinc-200">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-zinc-800 border-zinc-700">
-                          <SelectItem value="brain">The Trailblazer</SelectItem>
-                          <SelectItem value="target">The Advisor</SelectItem>
-                          <SelectItem value="handshake">The Explorer</SelectItem>
-                        </SelectContent>
-                      </Select>
                     </div>
                   </div>
                   <div className="flex justify-end gap-3">

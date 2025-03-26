@@ -48,7 +48,7 @@ export function AvatarIcon() {
         };
       case 'handshake':
         return {
-          background: 'linear-gradient(135deg, #A855F7 0%, #6B21A8 100%)', // Purple gradient
+          background: 'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)', // Red gradient
           icon: avatarEmojis.handshake
         };
       default:
